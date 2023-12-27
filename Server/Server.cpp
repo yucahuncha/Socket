@@ -18,18 +18,28 @@ int main()
 	//可以和客户端进行通信了
 	char	buf[BUFSIZ] = { 0 };
 	//recv从指定的socket接受信息
-
-	if (0 < recv(clifd, buf, BUFSIZ, 0))
+	while (true)
 	{
-		std::cout << "recv:" << buf << std::endl;
+		if (0 < recv(clifd, buf, BUFSIZ, 0))
+		{
+			std::cout << "recv:" << buf << std::endl;
+		}
+		//发送消息
+		std::cout << "send>";
+		gets_s(buf, BUFSIZ);
+		if (SOCKET_ERROR == send(clifd, buf, strlen(buf), 0))
+		{
+			err("SEND");
+		};
 	}
-
-
-	//closesocket(clifd);
-	//closesocket(serfd);
+	closesocket(clifd);
+	closesocket(serfd);
 
 
 	close_Socket();				//关闭socket连接
+
+	std::cout << "--------end----------" << std::endl;
+
 	getchar();
 	return 0;
 }
