@@ -5,7 +5,7 @@
 #define err(errMsg) std::cout << "[line:"<< __LINE__ <<"]" <<errMsg <<" failed code:" << WSAGetLastError()					
 //定义报错宏函数      LINE获取行数，errmsg获取报错位置
 #include<iostream>
-
+#define PORT 8888; //[0,65535    0~1024 是保留端口]
 //打开网络库
 bool init_Socket();
 
